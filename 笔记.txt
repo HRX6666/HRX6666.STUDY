@@ -1,4 +1,4 @@
-
+ACTIVITY
 setContentView(R.layout.**activity_second**);
 需要和LAYOUT>XML文件名一样
     
