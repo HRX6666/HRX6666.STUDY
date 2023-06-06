@@ -60,6 +60,7 @@
 
 
 
+
     AlertDialog dialog = builder.create();      //创建AlertDialog对象
     //对话框显示的监听事件
     dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -1049,3 +1050,179 @@ fun WeightDemo(){
 
 ```
 
+### Modifier.border and Moddifier.padding
+
+绘制边框
+
+```kotlin
+@Composable
+fun biankuang(){
+    Row{
+        Box(
+            Modifier
+                .padding(8.dp)//绘制外间隙
+                .border(2.dp, Color.Gray, shape = RoundedCornerShape(2.dp))//边框
+                .padding(8.dp)//内间隙
+        ){
+            Spacer(
+                Modifier
+                    .size(width = 100.dp, height = 10.dp)
+                    .background(Color.Gray))
+        }
+        Box(
+            modifier = Modifier
+                .size(100.dp)
+                .offset(x = 100.dp, y = 100.dp)
+                .background(Color.Gray)
+        )
+
+    }
+}
+```
+
+Compose中只有padding修饰符
+
+### Modifier.offset
+
+修饰组件的位置，分别传入水平和竖直方向偏移量即可
+
+其中调用offest方法是有顺序的，需要根据具体偏移的对象确定方法调用的位置
+
+在Compose的DSL中，一般只需要调用当前作用域的方法，像上面这样的Receiver跨级访问会成为写代码时的“噪声”，加大出错的概率。Compose考虑到了这个问题，可以通过@LayoutScopeMarker注解来规避Receiver的跨级访问。常用组件Receivier作用域类型均已使用@LayoutScopeMarker注解进行了声明。
+
+outer与inner作为private属性不能被外部直接访问，因此提供了专门的foldOut()与foldln()遍历Modifier链
+
+Modifier.pointerInput()定制手势监听处理
+
+foldIn和foldOut的方法相同：initial是折叠计算的初始值，operation是具体计算方法。Element参数表示当前遍历到的Modifier，返回值也是R类型，表示本轮计算的结果，会作为下一轮R类型参数传入。
+
+## 基础控件
+
+### Text文本
+
+fontWeight//字体粗细
+
+fontSize//字体大小
+
+lineHeight//行高
+
+letterSpacing//字体间距
+
+```kotlin
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    MyKT1Theme {
+
+        Text(
+            text= buildAnnotatedString {
+                withStyle(style = SpanStyle(fontSize = 25.sp)){
+                    append("你现在学的章节是")//插入文本
+                }
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.W900, fontSize = 25.sp//-绘制文本时使用的字体厚度(例如，加粗)。
+                    )
+                ){
+                    append("TEXT")
+                }
+                append("\n")
+                withStyle(style = ParagraphStyle(lineHeight = 24.sp)){
+                    append("在刚刚的章节中我们学会了如何使用文字样式，在后续的课程中我们会更加深入的讲解")
+                    append("\n")
+                    append("现在进入下一个章节")
+                    withStyle(
+                        style = SpanStyle(
+                            fontWeight = FontWeight.W900, textDecoration = TextDecoration.None, color = Color(0XFF59A869)
+                        )//textDecration也可以选择其他的样式。。。。。
+                    ){
+                        append("开始")
+                    }
+                }
+            }
+
+        )
+
+
+    }
+}
+```
+
+#### maxLines参数
+
+帮助我们将文本限制在指定行数之间，当文本超过了参数设置的值时，文本会被截断，overflow可以处理文字过多的场景
+
+```kotlin
+@Composable
+fun maxLinesTest(){
+     Column() {
+        Text(text ="你好世界，我正在使用ssssssssss来开发我的APP界面哦",
+            style = MaterialTheme.typography.bodyLarge)
+
+        Text(text ="你好世界，我正在使用ssssssssss来开发我的APP界面哦",
+            style = MaterialTheme.typography.bodyLarge, maxLines = 1,)
+
+        Text(text ="你好世界，我正在使用ssssssssss来开发我的APP界面哦",
+            style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
+         Text(text ="你好世界，我正在使用ssssssssss来开发我的APP界面哦",
+             style = MaterialTheme.typography.bodyLarge, maxLines = 4, overflow = TextOverflow.Clip)
+
+    }
+```
+
+### TextFiald输入框
+
+![image-20230606185357592](C:\Users\HAN\AppData\Roaming\Typora\typora-user-images\image-20230606185357592.png)
+
+```kotlin
+@Composable
+fun TextFieldSample(){
+     var text by remember {
+         mutableStateOf("")
+     }
+    Box(modifier = Modifier
+        .fillMaxSize()//填满父布局
+        .background(Color(0xFFD3D3D3)),
+        contentAlignment = Alignment.Center//将Box里面的组件放置在Box容器中
+    ){
+        BasicTextField(value = text, onValueChange = {
+            text=it
+        },
+        decorationBox = {innerTextField ->
+            Row (
+                verticalAlignment = Alignment.CenterVertically,
+                modifier= Modifier
+                    .padding(vertical = 2.dp, horizontal = 8.dp)
+            ){
+                Icon(imageVector =Icons.Filled.Search,
+                    contentDescription = stringResource(R.string.app_name ) )
+                Box(modifier = Modifier
+                    .padding(horizontal = 10.dp),
+                contentAlignment =Alignment.CenterStart){
+                    if (text.isEmpty()){
+                        Text(text = "输入点什么捏",
+                            style = TextStyle(
+                                color = Color(0,0,0,128)
+                            )
+                        )
+                    }
+                }
+                innerTextField
+            }
+
+
+        },
+        modifier = Modifier
+            .padding(horizontal = 10.dp)
+            .background(Color.White, CircleShape)
+            .height(30.dp)
+            .fillMaxWidth())
+    }
+
+
+}
+```
+
+#### Icon的五种类型
+
+![image-20230606192942561](C:\Users\HAN\AppData\Roaming\Typora\typora-user-images\image-20230606192942561.png)
