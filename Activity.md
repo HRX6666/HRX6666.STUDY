@@ -1226,3 +1226,55 @@ fun TextFieldSample(){
 #### Icon的五种类型
 
 ![image-20230606192942561](C:\Users\HAN\AppData\Roaming\Typora\typora-user-images\image-20230606192942561.png)
+
+#### Button
+
+Button有一个参数interactionSource，在前面的组件中也出现过。它是一个可以监听组件状态的事件源，通过它我们可以根据组件状态设置不同的样式，比如按钮按下时什么效果，正常时什么效果，类似传统视图中的Selector。interactionSource通过以下方法获取当前组件状态：• interactionSource.collectIsPressedAsState()判断是否按下状态。• interactionSource.collectIsFocusedAsState()判断是否获取焦点的状态。• interactionSource.collectIsDraggedAsState()判断是否拖动。
+
+```kotlin
+@Composable
+fun ButtonSample(){
+    val interactionSource= remember {
+        MutableInteractionSource()
+    }
+    val pressState=interactionSource.collectIsPressedAsState()
+    val bordeColor=if (pressState.value)Color.Cyan else Color.Magenta
+    Button(
+        onClick = {}
+    , modifier = Modifier.padding(60.dp),
+        border = BorderStroke(2.dp,color=bordeColor),
+        interactionSource = interactionSource
+            ){
+        Icon(imageVector = Icons.Filled.Info,
+            contentDescription = stringResource(R.string.app_name),
+        modifier = Modifier.size(ButtonDefaults.IconSize))
+        Spacer(modifier =Modifier.size(ButtonDefaults.IconSize))
+            Text("PRESS")
+        }
+
+}
+```
+
+#### Checkbox复选框
+
+```kotlin
+@Composable
+fun CheckBoxSample(){
+    val checkedState= remember {
+        mutableStateOf(true)
+    }
+    Checkbox(
+        checked=checkedState.value,
+        onCheckedChange={ checkedState.value=it},
+        colors=CheckboxDefaults.colors(
+            checkedColor = Color(0xFF0079D3)
+        )
+    )
+}
+```
+
+很多时候，我们的复选框会有很多个，并且希望能够统一选择或者取消
+
+这个时候就可以用TriStateCheckBox组件。
+
+在子复选框全选中时，TriCheckBox显示已完成的状态，而如果只有部分复选框选中时，TriCheckBox则显示不确定的状态，当我们在这个时候单击它，则会将剩余没有选中的复选框设置为选中状态.
