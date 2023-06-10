@@ -1,4 +1,6 @@
-## Activity
+
+
+Activity
 
 一般启动模式为standard
 
@@ -1277,4 +1279,221 @@ fun CheckBoxSample(){
 
 这个时候就可以用TriStateCheckBox组件。
 
-在子复选框全选中时，TriCheckBox显示已完成的状态，而如果只有部分复选框选中时，TriCheckBox则显示不确定的状态，当我们在这个时候单击它，则会将剩余没有选中的复选框设置为选中状态.
+```kotlin
+@Composable
+fun CheckBoxSampleall(){
+    val (state,onStateChange)= remember { mutableStateOf(true) }
+    val(state2,onStateChange2)= remember { mutableStateOf(true) }//设置CheckBox状态
+    val parenState= remember(state ,state2) {
+        if (state&&state2) ToggleableState.On
+        else if (!state&&!state2) ToggleableState.Off
+        else ToggleableState.Indeterminate//不确定的状态
+        //TriStateCheckBox判断从属复选框的状态
+    }
+
+        val onParentClick={
+            val  s = parenState != ToggleableState.On
+            onStateChange(s)
+            onStateChange2(s)
+        }
+        TriStateCheckbox(state =parenState, onClick =onParentClick,
+            colors = CheckboxDefaults.colors(
+                checkedColor = MaterialTheme.colorScheme.primary
+            )
+        )
+    Column(Modifier.padding(10.dp,0.dp,0.dp,0.dp)) {
+        Checkbox(state,onStateChange)
+        Checkbox(state2, onStateChange2)
+    }
+    }
+
+```
+
+在子复选框全选中时，TriCheckBox显示已完成的状态，而如果只有部分复选框选中时，TriCheckBox则显示不确定的状态，用ToggleableState判断CheckBox状态。
+
+### Switch组件
+
+Switch组件可以控制单个项目的开启或关闭状态
+
+### Slider滑杆组件
+
+Slider类似于SeekBar的使用，其中colors参数设置的是滑杆部位的颜色，可分区设置，step参数讲进度条平分成step+1段
+
+```kotlin
+@Composable
+fun SliderDemo(){
+    val silderDemo by remember { mutableStateOf(0f) }
+    Text(text = "%.lf".format(silderDemo * 100 )+ "%")
+    Slider(value=silderDemo,onValueChange={
+        silderDemo = it
+    })
+}
+
+```
+
+### Dialog对话框
+
+其中content允许我们通过传入自己的Composable组件来描述Dialog页面
+
+在Dialog组件显示过程中，当我们点击对话框以外区域时，onDismissRequest会触发执行，修改openDialog状态为false，触发DialogSample重组，此时判断openDialog为false, Dialog无法被执行，对话框消失
+
+在Dialog组件显示过程中，当我们点击对话框以外区域时，onDismissRequest会触发执行，修改openDialog状态为false，触发DialogSample重组，此时判断openDialog为false, Dialog无法被执行，对话框消失
+
+#### 警告对话框AlertDialog
+
+AlertDialog组件是Dialog组件的更高级别的封装，同时遵守着Material Design设计标准。它已经帮助我们定位好了标题、内容文本、按钮组的位置。我们只需要提供相应的组件即可。
+
+```kotlin
+@Composable
+fun AlertDialogDemo(){
+    val openDiaglog= remember { mutableStateOf(true) }
+    if(openDiaglog.value){
+        AlertDialog(
+            onDismissRequest = {
+                openDiaglog.value=false
+            }, title = {
+                Text(text = "开启位置服务")
+            }, text = {
+                Text( "这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这意味这")
+            }, confirmButton = {
+                TextButton(onClick = {
+                    openDiaglog.value = false//其他需要执行的业务需求
+                }) { Text("同意") }
+            }, dismissButton = {
+                TextButton(onClick = { openDiaglog.value = false })
+
+                {
+                Text("取消")
+
+                }
+            }
+
+        )
+    }
+}
+
+```
+
+### 进度条
+
+```kotlin
+@Composable
+fun Demo2(){
+    var progress by remember {
+        mutableStateOf(0f) 
+    }
+    
+    //创建一个动画
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(20.dp)) {
+        CircularProgressIndicator()
+        Spacer(modifier = Modifier.requiredHeight(10.dp))
+        CircularProgressIndicator(progress=progress.absoluteValue)
+        Spacer(modifier = Modifier.requiredHeight(10.dp))
+        TextButton(onClick ={
+            if (progress.absoluteValue<1.0f)progress.absoluteValue=progress.absoluteValue+0.1f },
+            modifier = Modifier.background(Color.DarkGray)
+        ){
+            Text(text = "增加进度")
+            
+        }
+    }
+}
+```
+
+## 布局
+
+### 线性布局Column
+
+在对齐效果的影响下，Modifier.align修饰符会优先于Column的horizontalAlignment参数。
+
+对于垂直布局中的子项，Modifier.align只能设置自己在水平方向的位置，反之水平布局的子项，只能设置自己在垂直方向的位置。
+
+这很好理解，我们以Column为例，当Column中有多个子项时，它们在垂直方向永远是线性排列。
+
+如果各子项被允许单独设置，可能会出现Bad Case，比如Column中有A、B、C三个子项，如果配置A的对齐方向是Aligment. Bottom, B为Aligment. Top，那么这显然是无法实现的。
+
+所以Clumen的子项在垂直方向的布局只能通过verticalArragnement进行整体设置。
+
+### Row
+
+Row的horizontalArrangement参数帮助我们合理配置了按钮的水平位置。
+
+可以看到，喜欢和分享按钮呈左右两端对齐。
+
+Arrangment定义了很多子项位置的对齐方式，除了Center（居中）、Start（水平靠左）、End（水平靠右）等常见的对齐方式，还有一些特定场景下可能用到的对齐方式，例如Space Between、Space Evenly等
+
+### 帧布局
+
+#### Box组件
+
+Box组件是一个能够将里面的子项依次按照顺序**堆叠**的布局组件，在使用上类似于传统视图中的FrameLayout
+
+#### Surface
+
+Surface从字面上来理解，是一个平面，在Material Design设计准则中也同样如此，我们可以**将很多的组件摆放在这个平面之上**，可以设置这个平面的边框、圆角、颜色等。
+
+```kotlin
+@Composable
+fun buju(){
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        tonalElevation = 10.dp,
+        modifier = Modifier
+            .width(300.dp)
+            .height(100.dp)
+    ) {
+        Row(modifier = Modifier.clickable {}
+        )
+        {
+            Image(painter = painterResource(id = R.drawable.sun), contentDescription = stringResource(
+                R.string.app_name
+            ) , modifier = Modifier.size(100.dp),
+            contentScale = ContentScale.Crop)
+            Spacer(Modifier.padding(horizontal = 12.dp))
+            Column(modifier = Modifier.fillMaxHeight(),
+            verticalArrangement = Arrangement.Center) {
+                Text(text = "Alice", style = MaterialTheme.typography.headlineLarge)
+                Spacer(modifier = Modifier.padding(vertical = 8.dp))
+                Text(text = "礼物")
+            }
+            
+        }
+        
+    }
+}
+```
+
+### 约束布局ConstrainLayout
+
+首先添加依赖
+
+```
+ implementation('androidx.constraintlayout:constraintlayout-compose:1.0.1')
+```
+
+Compose版本的ConstraintLayout中，可以主动创建引用并绑定至某个具体组件上，从而实现资源ID相似的功能。
+
+每个组件都可以利用其他组件的引用获取到其他组件的摆放位置信息，从而确定自己应摆放的位置。
+
+在Compose中有两种创建引用的方式：createRef()和createRefs()。
+
+createRef()每次只会创建一个引用，而createRefs()每次可以创建多个引用（最多16个）
+
+接下来可以使用Modifier.constrainAs()修饰符将前面创建的引用绑定到某个具体组件上。
+
+可以在constrainAs尾部Lambda内指定组件的约束信息。
+
+值得注意的是，我们只能在ConstraintLayout尾部的Lambda中使用createRef()、createRefs()创建引用，并使用Modifier.constrainAs()来绑定引用
+
+这是因为ConstrainScope尾部Lambda的Reciever是一个ConstraintLayoutScope作用域对象。
+
+#### Barrier分界线
+
+我们使用createEndBarrier创建一条结尾分界线，此时分界线位置位于两个文本中较长文本的结尾处
+
+接下来设置输入框的约束信息，将左侧起始位置指定为分界线后10dp的位置。
+
+#### 引导线
+
