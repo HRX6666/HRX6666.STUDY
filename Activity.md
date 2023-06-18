@@ -63,6 +63,7 @@ Activity
 
 
 
+
     AlertDialog dialog = builder.create();      //创建AlertDialog对象
     //对话框显示的监听事件
     dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -1496,4 +1497,186 @@ createRef()每次只会创建一个引用，而createRefs()每次可以创建多
 接下来设置输入框的约束信息，将左侧起始位置指定为分界线后10dp的位置。
 
 #### 引导线
+
+可以不依赖任何引用凭空出现一条引导线（不知道为什么现在的编译器用不了待发现）
+
+### Chain链接约束
+
+ConstraintLayout另一个非常好用的特性就是Chain链接约束，通过链接约束可以允许多个组件平均分配布局空间，这个功能类似于weight修饰符。
+
+• Spread：链条中每个元素平分整个parent空间。
+
+• SpreadInside：链条中首尾元素紧贴边界，剩下每个元素评分整个parent空间。
+
+• Packed：链条中所有元素聚集到中间。
+
+### Scaffold手脚架
+
+```kotlin
+Scaffold(
+    modifier: Modifier = Modifier,//布局修饰
+    scaffoldState: ScaffoldState = rememberScaffoldState(),//脚手架状态（例如控件抽屉是否打开）
+    topBar: @Composable () -> Unit = {},//屏幕顶部的标题栏
+    bottomBar: @Composable () -> Unit = {},//屏幕底部的标题栏
+    snackbarHost: @Composable (SnackbarHostState) -> Unit = { SnackbarHost(it) },//用来展示SnackBar的一个组件
+    floatingActionButton: @Composable () -> Unit = {},//悬浮按钮
+    floatingActionButtonPosition: FabPosition = FabPosition.End,//	悬浮按钮在屏幕上的位置
+    isFloatingActionButtonDocked: Boolean = false,//	如果存在BottomBar，那么是否与BottomBar重叠一半的高度
+    drawerContent: @Composable (ColumnScope.() -> Unit)? = null,//	抽屉组件中的内容
+    drawerGesturesEnabled: Boolean = true,//否允许手势控制抽屉的打开和关闭
+    drawerShape: Shape = MaterialTheme.shapes.large,//抽屉组件的形状
+    drawerElevation: Dp = DrawerDefaults.Elevation,//抽屉组件的阴影高度
+    drawerBackgroundColor: Color = MaterialTheme.colors.surface,//抽屉组件的背景色
+    drawerContentColor: Color = contentColorFor(drawerBackgroundColor),//抽屉组件内容的背景色
+    drawerScrimColor: Color = DrawerDefaults.scrimColor,//抽屉组件打开时屏幕剩余部分的遮盖颜色
+    backgroundColor: Color = MaterialTheme.colors.background,//脚手架组件的背景色
+    contentColor: Color = contentColorFor(backgroundColor),//脚手架组件内容的背景色
+    content: @Composable (PaddingValues) -> Unit//脚手架中的组件
+)
+```
+
+```kotlin
+@Composable
+fun ScaffoldTest() {
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        scaffoldState = scaffoldState,
+        drawerContent = {//抽屉组件
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(text = "抽屉组件中内容")
+
+
+            }
+        },
+        topBar = {//屏幕顶部的标题栏
+            TopAppBar(title = { Text("脚手架") },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        scope.launch { scaffoldState.drawerState.open() }
+                    }) {
+                        Icon(Icons.Filled.Menu, contentDescription = null)
+                    }
+                })
+        },
+        floatingActionButton = {//悬浮按钮
+            ExtendedFloatingActionButton(
+                text = { Text("悬浮按钮") },
+                onClick = {
+                    scope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar("点击了悬浮按钮")
+                    }
+                })
+        },
+        floatingActionButtonPosition = FabPosition.End,//悬浮按钮在屏幕中的位置
+        content = {//屏幕内容
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(text = "屏幕内容区域")
+            }
+        },
+        snackbarHost = {
+            SnackbarHost(it) { data ->
+                Snackbar(
+                    snackbarData = data,
+                    backgroundColor = Color.Blue,
+                    contentColor = Color.White,
+                    shape = RoundedCornerShape(10.dp)
+                )
+            }
+        })
+
+}
+```
+
+### 根据设计稿编写页面
+
+```kotlin
+@Composable
+fun WelcomePage(){
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Pink_100)
+    ){
+        Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = R.drawable.drawinghome)),
+            contentDescription ="WECLOME_bg" ,
+        modifier = Modifier.fillMaxSize())
+        WelcomeContent()
+    }
+}
+
+@Composable
+fun WelcomeContent() {
+    Column(modifier =Modifier.fillMaxSize()) {
+        Spacer(Modifier.height(260.dp))
+        Spacer(modifier = Modifier.height(180.dp))
+        WelcomeTile()
+        Spacer(modifier = Modifier.height(70.dp))
+        WelcomeButtons()
+
+    }
+}
+
+@Composable
+fun  SunImage() {
+    Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = R.drawable.sun)),
+        contentDescription ="WECLOME_illos" ,
+    modifier = Modifier
+        .wrapContentSize()
+        .padding(start = 88.dp))
+
+}
+
+@Composable
+fun WelcomeTile() {
+    Column (horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxWidth()
+    ){
+        Image(painter = rememberVectorPainter(image = ImageVector.vectorResource(id = R.drawable.sun)),
+            contentDescription ="WECLCOME_loge" ,
+        modifier = Modifier
+            .wrapContentWidth()
+            .height(32.dp))
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .height(32.dp), contentAlignment = Alignment.BottomCenter)
+        {
+        Text(text = "Beautiful home garden solutions",
+        textAlign = TextAlign.Center,
+        color = gray)
+        }
+    }
+}
+
+@Composable
+fun  WelcomeButtons() {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth())
+    {
+    Button(
+        onClick = {},
+        modifier = Modifier
+            .height(48.dp)
+            .padding(horizontal = 16.dp)
+            .fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(Pink_900)
+    ){
+        Text(text = "Create account",
+        color= white850)
+    }
+        Spacer(modifier = Modifier.height(24.dp))
+        TextButton(onClick = { /*TODO*/ }) {
+            Text(text = "Login in ",
+            color = Pink_900)
+
+        }
+    }
+}
+
+```
+
+1.根据设计稿分别定义颜色、主题、字体、形状
+
+2.将设计稿中的元素拆分成一个个小零件进行编写
+
+3.边写完后进行组装，Spacer控制零件之间的距离
 
