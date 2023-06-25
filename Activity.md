@@ -64,6 +64,7 @@ Activity
 
 
 
+
     AlertDialog dialog = builder.create();      //创建AlertDialog对象
     //对话框显示的监听事件
     dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -1680,3 +1681,96 @@ fun  WelcomeButtons() {
 
 3.边写完后进行组装，Spacer控制零件之间的距离
 
+## 主题
+
+我们先来认识一下MaterialTheme。MaterialTheme是Compose所提供的基于Material Design规范的主题样式模板。通过主题样式模板的配置，整个应用的Composable组件会随主题切换实现相应的样式改变。
+
+我们先来认识一下MaterialTheme。MaterialTheme是Compose所提供的基于Material Design规范的主题样式模板。通过主题样式模板的配置，整个应用的Composable组件会随主题切换实现相应的样式改变。
+
+primary指的是整个应用最常用的主色primaryVariant主色的变种色，用于主色调区分场景
+
+secondary 次选色强调区分主色
+
+surface平面色，用于scaffold组件背景色error错误色onPrimary组件上的文本和icon颜色
+
+**在Theme.kt中可根据需求进行修改**
+
+可以发现在获取到当前主题配色时，使用的是MaterialTheme单例对象的colors属性，间接使用了LocalColors。
+
+总体来说，在自定义Theme中使用的是MaterialTheme函数为LocalColors赋值，而在获取时使用的是MaterialTheme单例对象，间接从LocalColors中获取到值。
+
+### CompositionLocal
+
+Compose提供了CompostionLocal用来完成在Composable树中共享数据方式。
+
+CompositionLocals是具有层级的，可以被限定在以某个Composable作为根结点的子树中，其默认会向下传递，当然当前子树中的某个Composable可以对该CompositionLocals进行覆盖，从而使得新值会在这个Composable中继续向下传递。
+
+## 状态管理与重组
+
+在传统视图体系中，状态大多以View的成员变量形式存在，例如TextView的mText就是这个View自身的状态。
+
+由于数据来源单一、数据变动可溯源的优点，单向数据流架构下的逻辑更加清晰。
+
+Compose在设计之初就贯彻了单向数据流的设计思想：首先Composable只是一个函数，不会像View那样轻易封装私有状态，状态随处定义的情况得到抑制；其次Compose的状态像LiveData一样能够被观察，当状态变化后，相关联的UI会自动刷新，不需要像传统视图那样命令式地逐个通知。因此即使没有ViewModel和LiveData的加持，也能轻松写出符合单向数据流架构的代码
+
+```kotlin
+@Composable
+fun timeDemo(){
+    Column(modifier = Modifier.padding(16.dp)) {
+        var counter by remember { mutableStateOf(0) }
+    Text("Click the buttons to adjust your value:",
+        Modifier.fillMaxWidth(),
+        textAlign=TextAlign.Center)
+    Text("$counter",//记住变量前需要带$符号！！！！
+    Modifier.fillMaxWidth(),
+    textAlign = TextAlign.Center)
+    Row{
+        Button(onClick = {counter--},
+        Modifier.weight(1f)){
+            Text( "-")
+        }
+        Spacer(modifier =Modifier.width(16.dp))
+        Button(
+            onClick = {counter++},
+            Modifier.weight(1f)
+        ){
+            Text(text = "+")
+        }
+    }
+    }
+}
+```
+
+### 关键字remember
+
+此处的remember正是保证获取更新值的关键，如果移除包裹mutableStateOf的remember，此时会发现当单击Button时，counter数字没有更新。状态counter的变化会触发Column的重组，当函数再次执行到mutableStateOf(0)时，会重新创建一个初始值为0的MutableState对象，无法继承前次组合时的状态。而所谓的“状态”应该能跨越重组长期存在。
+
+在Composable首次执行时，remember中计算得到的数据会自动缓存，当Composable重组再次执行到remember处会返回之前已缓存的数据，无须重新计算。
+
+remember的这一特性非常重要，让一个函数式组件像一个面向对象组件一样持有自己的“成员变量”。需要注意，remember也是一个Composable函数，因此只能在Composable中调用。
+
+### 状态持久化与恢复
+
+remember{}可以帮我们解决这个问题。
+
+在Composable首次执行时，remember中计算得到的数据会自动缓存，当Composable重组再次执行到remember处会返回之前已缓存的数据，无须重新计算。remember的这一特性非常重要，让一个函数式组件像一个面向对象组件一样持有自己的“**成员变量**”。需要注意，remember也是一个Composable函数，因此只能在Composable中调用。
+
+### 使用ViewModel管理状态
+
+所以当Stateful的业务逻辑变得越发复杂时，可以将Stateful的状态提到ViewModel管理，Stateful也就变为了一个Stateless，通过参数传入不同ViewModel即可替换具体业务逻辑，可复用性和可测试性也大大提高。添加依赖如下：
+
+```java
+implementation "android.arch.lifecycle:extensions:1.1.1"
+```
+
+处于底层的业务服务范围往往更广，存活时间也更长。
+
+### 智能的重组
+
+传统视图中通过修改View的私有属性来改变UI,Compose则通过重组刷新UI。
+
+Compose的重组非常“智能”，当重组发生时，只有状态发生更新的Composable才会参与重组，没有变化的Composable会跳过本次重组
+
+Composable会以任意顺序执行
+
+视图树构建的实际过程比较复杂，Composable执行过程中，先将生成的Composition状态存入SlotTable，而后框架基于SlotTable生成LayoutNode树，并完成最终界面渲染。谨慎来说，Composable的比较逻辑发生在SlotTable中，并非是Composable在执行中直接与视图树节点作比较。
