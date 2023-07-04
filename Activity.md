@@ -66,6 +66,7 @@ Activity
 
 
 
+
     AlertDialog dialog = builder.create();      //创建AlertDialog对象
     //对话框显示的监听事件
     dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -1783,3 +1784,4 @@ SharedPreferences
 ```
 
 访问和修改由Context返回的首选项数据的接口。getSharedPreferences。对于任何特定的首选项集，都有一个所有客户机共享的该类实例。对首选项的修改必须经过SharedPreferences。编辑器对象，以确保将首选项值提交到存储时保持一致的状态和控制。从各种get方法返回的对象必须被应用程序视为不可变的。注意:这个类提供了强一致性保证。它正在使用昂贵的操作，这可能会减慢应用程序的速度。频繁更改属性或可以容忍损失的属性应该使用其他机制。要了解更多细节，请参阅SharedPreferences. editor .commit()和SharedPreferences的注释。编辑器。适用于()。注意:这个类不支持跨多个进程使用。开发人员指南有关使用SharedPreferences的更多信息，请阅读Data Storage开发人员指南。上下文。getSharedPreferences参见:访问和修改由Context返回的首选项数据的接口。getSharedPreferences。对于任何特定的首选项集，都有一个所有客户机共享的该类实例。对首选项的修改必须经过SharedPreferences。编辑器对象，以确保将首选项值提交到存储时保持一致的状态和控制。从各种get方法返回的对象必须被应用程序视为不可变的。注意:这个类提供了强一致性保证。它使用了昂贵的操作，这可能会减慢应用程序的速度。频繁更改属性或可以容忍损失的属性应该使用其他机制。要了解更多细节，请参阅SharedPreferences.Editor.commit()和SharedPreferences.Editor的注释。适用于()。注意:这个类不支持跨多个进程使用。开发人员指南有关使用SharedPreferences的更多信息，请阅读Data Storage开发人员指南。上下文。getSharedPreferences参见:
+
