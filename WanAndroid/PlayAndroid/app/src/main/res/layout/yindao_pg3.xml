@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FBFFFF">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="330dp"
+        android:layout_height="330dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="Blogging Colored.json"
+        app:lottie_imageAssetsFolder="assets/"
+        app:lottie_loop="true" />
+    <TextView
+        android:id="@+id/tv_xiang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="想 你 所 想"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="430dp"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="80dp"
+        android:text="学习安卓知识"
+        android:textColor="#969595"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="400dp"
+        android:textSize="18dp" />
+    <RelativeLayout
+        android:id="@+id/btn_start"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/enter_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="530dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="立即学习"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

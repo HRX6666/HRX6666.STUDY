@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F9F9">
+
+    <ImageView
+        android:layout_width="340dp"
+        android:layout_height="370dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/yindao1" />
+
+    <TextView
+        android:id="@+id/tv_xiang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="知 识 多 样"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="550dp"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="80dp"
+        android:text="获取更多知识"
+        android:textColor="#969595"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="514dp"
+        android:textSize="18dp" />
+
+</RelativeLayout>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="theme1">
+        <item name="main_bg">@color/cardview_shadow_start_color</item>
+        <item name="mian_text">@color/design_default_color_error</item>
+        <item name="second_bg">@color/design_default_color_on_primary</item>
+        <item name="second_text">@color/design_default_color_primary_dark</item>
+    </style>
+    <style name="theme2">
+        <item name="main_bg">@color/design_default_color_surface</item>
+        <item name="mian_text">@color/material_on_background_emphasis_high_type</item>
+        <item name="second_bg">@color/material_on_primary_emphasis_medium</item>
+        <item name="second_text">@color/material_on_surface_stroke</item>
+    </style>
+
+    <!-- 圆形图片 -->
+    <style name="circleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- 圆角图片 -->
+    <style name="roundedImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
+    </style>
+
+    <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
+
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
+    </style>
+    <!-- ActionSheet进出动画 -->
+    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
+    </style>
+    <style name="ib" parent="@android:style/Widget.Material.Button.Borderless.Colored">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    \ <style name="ct">
+    <item name="android:textColor">#ffffffff</item>
+    <item name="android:layout_gravity">center</item>
+</style>
+
+    <style name="at">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="ib.a" >
+        <item name="android:minHeight">1dp</item>
+    </style>
+
+    <style name="id" parent="@android:style/Holo.ButtonBar.AlertDialog">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="tl">
+        <item name="android:stretchColumns">1</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="at.a">
+        <item name="android:lineSpacingMultiplier">0.7</item>
+    </style>
+    <style name="at.b">
+        <item name="android:lineSpacingMultiplier">0.8</item>
+    </style>
+    <style name="at.c">
+        <item name="android:lineSpacingMultiplier">0.9</item>
+    </style>
+
+    <style name="textShadow1">
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowColor">#ff000000</item>
+    </style>
+
+    <style name="textShadow2">
+        <item name="android:shadowDy">3</item>
+        <item name="android:shadowDx">3</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowColor">#ff000000</item>
+    </style>
+
+    <style name="textShadow3">
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowDx">4</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:shadowColor">#ff000000</item>
+    </style>
+
+    <style name="textShadow4">
+        <item name="android:shadowDy">5</item>
+        <item name="android:shadowDx">5</item>
+        <item name="android:shadowRadius">10</item>
+        <item name="android:shadowColor">#ff000000</item>
+    </style>
+
+    <style name="ButtonBlue" parent="@android:style/Widget.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:minHeight">25dp</item>
+        <item name="android:minWidth">40dp</item>
+        <item name="android:background">@color/purple_700</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="ImageButton">
+        <item name="android:width">48dp</item>
+        <item name="android:height">48dp</item>
+        <item name="android:background">@color/purple_700</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:clickable">true</item>
+    </style>
+</resources>

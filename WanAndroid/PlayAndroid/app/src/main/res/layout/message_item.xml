@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/article_item_shape"
+    android:id="@+id/ly_ry"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textColor="#1B5E8A"
+            android:textSize="16sp"
+            android:layout_marginLeft="10dp"
+            android:text="from"/>
+        <TextView
+            android:id="@+id/msg_fromuser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textColor="#818486"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:text="3257124435@qq.com"/>
+        <TextView
+            android:id="@+id/msg_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textColor="#818486"
+            android:textSize="14sp"
+            android:layout_marginLeft="10dp"
+            android:text="回复了@xujiafeng"/>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/msg_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginRight="12dp"
+        android:textColor="#202020"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="16sp"
+        android:text="海信的狗系统也是,,.,用着用着,...总是提示内存不足,还老是重启...最后刷机好了..."/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/top_article"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E51717" />
+
+        <TextView
+            android:textColor="#70B9DA"
+            android:id="@+id/article_superChapterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/article_chapterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/msg_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:textColor="#2D7F21"
+                android:textSize="17sp"
+                android:text="评论回复"/>
+            <TextView
+                android:id="@+id/msg_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:textColor="#818486"
+                android:textSize="14sp"
+                android:layout_marginLeft="10dp"
+                android:text="2023-06-06 16.03"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#80E5E5E5"/>
+
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="46dp">
+    <TextView
+        android:layout_marginLeft="6dp"
+        android:layout_gravity="center"
+        android:textSize="16sp"
+        android:id="@+id/system_name2"
+        android:textColor="#707072"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

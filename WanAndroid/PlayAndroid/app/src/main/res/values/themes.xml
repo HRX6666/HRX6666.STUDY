@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.PlayAndroid" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#E03D644D</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="colorPrimaryVariant">#C6D5FF</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#2E3A5B</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="bt_large_style" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textColor">#FFE4F0</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingTop" >16dp</item>
+        <item name="android:paddingBottom" >16dp</item>
+        <item name="android:background">#E06B9B7F</item>
+    </style>
+
+        <style name="TabTextStyle">
+            <item name="android:textSize">@dimen/textSize</item>
+
+        </style>
+        <dimen name="textSize">18sp</dimen>
+        <dimen name="article_item_title">20sp</dimen>
+    <style name="Theme.PlayAndroid.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.PlayAndroid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.PlayAndroid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- Base application theme. -->
+    <style name="TextColorTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">#ff0000</item>
+    </style>
+
+</resources>

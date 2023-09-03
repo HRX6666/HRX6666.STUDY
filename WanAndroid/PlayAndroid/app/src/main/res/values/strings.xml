@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">玩转安卓</string>
+    <string name="app_widget">进入学习更多知识</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_web">WebActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!-- 单选框文字 -->
+    <string name="canCreateDuplicateNotification">是否可弹出多个通知</string>
+
+    <string name="sys_notification_text_color_is">通知栏系统文字颜色为：%1$d</string>
+    <string name="sys_notification_text_color_is_null">通知栏系统文字颜色为空</string>
+    <string name="notification_title">北林大9名女生哈尔滨遇车祸 4死5伤</string>
+    <string name="notification_text">北林大9名大四女生结伴乘坐面包车从哈尔滨前往雪乡途中，发生交通事故，造成4人死亡，5人受伤</string>
+</resources>

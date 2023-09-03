@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/add_collect"
+        android:icon="@drawable/xingxing"
+        android:title="收藏"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/add_share"
+        android:icon="@drawable/share"
+        app:showAsAction="ifRoom"
+        android:title="分享" />
+    <item
+        android:id="@+id/web_collect"
+        android:title="收藏网站"
+        />
+    <item
+        android:id="@+id/web_uncollect"
+        android:title="取消收藏"
+        />
+</menu>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/er"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#10BCE54B"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="28dp"
+        android:paddingEnd="28dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="注册"
+            android:textColor="#4E4C4C"
+            android:textSize="38dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginBottom="28dp"
+            android:background="@drawable/circle_dittexte"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/im_enroll_username"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:src="@drawable/no_user"
+                tools:visibility="visible" />
+
+            <EditText
+                android:id="@+id/edit_enroll_account"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="5"
+                android:background="@null"
+                android:hint="请输入手机号或用户名"
+                android:inputType="text"
+                android:lines="1"
+                android:maxLength="16"
+                android:textColor="#000"
+                android:textColorHint="#4A4747"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginBottom="26dp"
+            android:background="@drawable/circle_dittexte"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/enroll_pass_clock"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:src="@drawable/lock" />
+
+            <EditText
+                android:id="@+id/edit_enroll_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="5"
+                android:background="@null"
+                android:hint="请输入密码"
+                android:inputType="text"
+                android:lines="1"
+                android:maxLength="18"
+                android:textColor="#000"
+                android:textColorHint="#4A4747"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/password_eye"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:src="@drawable/closeeye" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="26dp"
+            android:layout_marginBottom="26dp"
+            android:background="@drawable/circle_dittexte"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/enroll_repass_clock"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:src="@drawable/lock" />
+
+            <EditText
+                android:id="@+id/edit_enroll_repassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="5"
+                android:background="@null"
+                android:hint="请再次输入密码"
+                android:inputType="text"
+                android:lines="1"
+                android:maxLength="18"
+                android:textColor="#000"
+                android:textColorHint="#4A4747"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/repassword_eye"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:src="@drawable/closeeye" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_enroll"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#E0B9CFC2"
+                android:padding="1dp"
+                android:text="注册"
+                android:textAllCaps="false"
+                android:textColor="#423535" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/enroll_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:drawablePadding="4dp"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="#535151"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

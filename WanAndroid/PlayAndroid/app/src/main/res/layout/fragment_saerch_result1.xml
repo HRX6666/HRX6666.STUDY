@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/search_key"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#091455"
+        android:textSize="18sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:background="#FFFFFF"
+            android:id="@+id/search_result_v"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/f_search_bar_1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="loading.json"
+            android:layout_gravity="center"
+            app:lottie_imageAssetsFolder="assets/"
+            app:lottie_loop="true"/>
+
+
+    </FrameLayout>
+</LinearLayout>

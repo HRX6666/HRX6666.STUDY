@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="main_bg" format="reference|color"/>
+    <attr name="mian_text" format="reference|color"/>
+    <attr name="second_bg" format="reference|color"/>
+    <attr name="second_text" format="reference|color"/>
+</resources>
